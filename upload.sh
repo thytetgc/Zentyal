@@ -3,7 +3,7 @@ HOSTL="`hostname`"
 HOST='SERVER_FTP'
 USER='XXX'
 PASS='xxx'
-TARGETFOLDER='/home/storage/'$USER'/Backup/'$HOSTL''
+TARGETFOLDER='/Backup/'$HOSTL''
 SOURCEFOLDER='/Backup'
 
 lftp -e "
