@@ -11,7 +11,7 @@ rm /var/lib/zentyal/conf/backups/*
 	 echo "+-------------------------------------------------+OK"
 
 # Diretórios para fazer backup, /etc /root /var
-source='/etc /Scripts /usr/zentyal /var/lib/zentyal/ /var/log /opt'
+source='/etc /Scripts /usr/zentyal /var/lib/zentyal/ /opt'
 
 # Diretório de backup, /Backup
 #backup=/Backup/"`hostname`"
