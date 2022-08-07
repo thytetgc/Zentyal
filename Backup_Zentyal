@@ -8,12 +8,11 @@ service sendmail restart
 # Cria arquivo e da permissão
 touch /opt/Backup_Zentyal
 chmod +x /opt/Backup_Zentyal
-
 cat > /opt/Backup_Zentyal <<EOF
 #!/bin/sh
 #clear 2>/dev/null/
 #host="'hostname | grep '[a-z]' | awk '{print $1}'"
-#host='`hostname`'
+#host="`hostname`"
 
 # Salva todos os modulos
 echo "Salvando todos os módulos"
@@ -33,7 +32,7 @@ echo ""
 
 # Envia por e-mail
 echo "Enviando por e-mail"
-echo | mutt -s 'Backup Zentyal' thiago@hostlp.net -a /var/lib/zentyal/conf/backups/*
+echo | mutt -s 'Backup Zentyal - '$host'' thiago@hostlp.net -a /var/lib/zentyal/conf/backups/*
 echo ""
 echo "Backup Completo e enviado por e-mail"
 EOF
