@@ -14,7 +14,7 @@ echo "Fazendo Backup e salva em /var/lib/zentyal/conf/backups/"
          echo "+-------------------------------------------------+OK"
 
 # Diretórios para fazer backup, /etc /root /var
-source='/etc /Scripts /usr/zentyal /var/lib/zentyal/ /opt'
+source='/etc /Scripts /usr/zentyal /var/lib/zentyal/ /opt /var/lib/zentyal/conf/backups/'
 
 # Diretório de backup, /Backup
 #backup=/Backup/"`hostname`"
