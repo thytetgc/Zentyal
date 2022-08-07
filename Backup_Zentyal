@@ -1,0 +1,41 @@
+# Instala dependencias
+apt-get install mutt sendmail -y --force-yes
+systemctl enable sendmail ; update-rc.d -f sendmail defaults
+
+# Inicia serviço
+service sendmail restart
+
+# Cria arquivo e da permissão
+touch /opt/Backup_Zentyal
+chmod +x /opt/Backup_Zentyal
+
+cat > /opt/Backup_Zentyal <<EOF
+#!/bin/sh
+#clear 2>/dev/null/
+#host="'hostname | grep '[a-z]' | awk '{print $1}'"
+#host='`hostname`'
+
+# Salva todos os modulos
+echo "Salvando todos os módulos"
+/usr/share/zentyal/global-action --action saveAllModules
+echo ""
+
+# Apaga Backups Antigos
+echo "Apagando Backups Antigos"
+#rm -rf /var/lib/zentyal/conf/backups/*
+mv -f /var/lib/zentyal/conf/backups/* /tmp/
+echo ""
+
+# Faz Backup e salva em "/var/lib/zentyal/conf/backups/"
+echo "Fazendo Backup e salva em /var/lib/zentyal/conf/backups/"
+/usr/share/zentyal/make-backup --config-backup --description BKP
+echo ""
+
+# Envia por e-mail
+echo "Enviando por e-mail"
+echo | mutt -s 'Backup Zentyal' thiago@hostlp.net -a /var/lib/zentyal/conf/backups/*
+echo ""
+echo "Backup Completo e enviado por e-mail"
+EOF
+
+echo "00 20 * * 6    root    /opt/Backup_Zentyal" >> /etc/crontab
